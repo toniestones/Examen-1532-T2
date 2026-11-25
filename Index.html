@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Examen - Intervención operativa en actividades de salvamento y rescate</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f3f4f7;color:#222}
+  header{background:#fff;border-bottom:3px solid #d8352a;padding:12px 20px;display:flex;align-items:center;gap:16px}
+  header img{height:44px}
+  header h1{font-size:16px;margin:0;color:#2c2c6c}
+  main{max-width:880px;margin:20px auto;background:#fff;padding:24px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  h2{margin:0 0 12px;font-size:20px;color:#2c2c6c}
+  label.campo{display:block;margin:12px 0 4px;font-weight:bold;font-size:14px}
+  input[type=text]{width:100%;max-width:420px;padding:9px;font-size:15px;border:1px solid #bbb;border-radius:5px;box-sizing:border-box}
+  .modelos label{margin-right:18px;font-size:15px}
+  button{font-size:15px;padding:9px 16px;border:0;border-radius:5px;background:#2c2c6c;color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+  button:disabled{opacity:.4;cursor:default}
+  button.sec{background:#e8e9f0;color:#2c2c6c}
+  button.peq{font-size:12px;padding:5px 9px;background:#e8e9f0;color:#2c2c6c}
+  button.peligro{background:#d8352a}
+  .aviso{color:#b00020;font-size:14px;min-height:18px;margin-top:8px}
+  .ok{color:#1b7a34;font-weight:bold}
+  .error{color:#b00020;font-weight:bold}
+  .barra{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:14px}
+  #reloj{font-family:monospace;font-size:20px;font-weight:bold;color:#2c2c6c}
+  #num{font-size:13px;color:#666;margin-bottom:6px}
+  #enunciado{font-size:17px;font-weight:bold;line-height:1.4;margin-bottom:12px}
+  .opcion{display:block;padding:9px 12px;border:1px solid #d6d8e0;border-radius:6px;margin-bottom:8px;font-size:15px;cursor:pointer}
+  .opcion:hover{background:#f5f6fb}
+  .opcion input{margin-right:8px}
+  #nav{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin:18px 0 8px}
+  #nav button{margin:0;padding:6px 0;background:#eef0f6;color:#333;font-size:13px}
+  #nav button.resp{background:#c9d7f2}
+  #nav button.actual{outline:2px solid #2c2c6c}
+  #contador{font-size:14px;color:#444}
+  .caja{background:#f5f6fb;border:1px solid #d6d8e0;border-radius:6px;padding:12px;margin-top:14px;font-size:14px}
+  .nota-legal{font-size:12px;color:#666;margin-top:14px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <img src="data:image/jpeg;base64,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" alt="Campus FP">
+  <h1>Intervención operativa en actividades de salvamento y rescate</h1>
+</header>
+
+<main>
+<!-- INICIO -->
+<section id="inicio">
+  <h2>Datos del examen</h2>
+  <label class="campo" for="nombre">Nombre y apellidos</label>
+  <input type="text" id="nombre" autocomplete="off">
+  <label class="campo" for="dni">DNI</label>
+  <input type="text" id="dni" autocomplete="off">
+  <label class="campo">Modelo</label>
+  <div class="modelos">
+    <label><input type="radio" name="modelo" value="A"> Modelo A</label>
+    <label><input type="radio" name="modelo" value="B"> Modelo B</label>
+    <label><input type="radio" name="modelo" value="C"> Modelo C</label>
+  </div>
+  <p><strong>Tiempo: 1 hora y 30 minutos.</strong> El examen se entrega solo cuando se agote el tiempo.</p>
+  <button id="empezar">Empezar examen</button>
+  <div id="continuar-box" class="caja" hidden>
+    Tienes un examen sin entregar guardado en este navegador.
+    <br><button id="continuar">Continuar examen anterior</button>
+  </div>
+  <div id="aviso-inicio" class="aviso"></div>
+</section>
+
+<!-- EXAMEN -->
+<section id="examen" hidden>
+  <div class="barra">
+    <div id="info"></div>
+    <div><span id="reloj">01:30:00</span></div>
+    <button id="entregar" class="peligro">Entregar</button>
+  </div>
+  <div id="num"></div>
+  <div id="enunciado"></div>
+  <div id="opciones"></div>
+  <div>
+    <button id="anterior" class="sec">Anterior</button>
+    <button id="borrar" class="sec">Borrar respuesta</button>
+    <button id="siguiente" class="sec">Siguiente</button>
+  </div>
+  <div id="nav"></div>
+  <p id="contador"></p>
+</section>
+
+<!-- FINAL -->
+<section id="final" hidden>
+  <h2>Examen entregado</h2>
+  <p id="motivo"></p>
+  <p>Estado del envío: <span id="estado"></span></p>
+  <p class="nota-legal">Si el envío no aparece como enviado, entrega el PDF descargado al profesor.</p>
+  <button id="reenviar" class="peq">Volver a generar y enviar el PDF</button>
+</section>
+</main>
+
+<script id="datos">
+const DATOS = {"asignatura": "Intervención operativa en actividades de salvamento y rescate", "curso": "2026/2027", "modelos": {"A": [{"q": "¿Cuándo protege realmente una cuerda de rescate?", "o": ["Cuando tiene un diámetro muy grande y es nueva", "Cuando es de un color llamativo y bien visible", "Cuando es de fabricación reciente y apenas usada", "Cuando está en manos de personal entrenado"], "c": 3}, {"q": "En rescate, ¿qué cuerdas son las únicas válidas?", "o": ["Las de cáñamo con estructura trenzada, resistentes", "Las sintéticas con estructura núcleo-vaina", "Las de algodón de gran diámetro, muy flexibles", "Las de polipropileno sin camisa protectora"], "c": 1}, {"q": "¿Qué material es el más usado en actividades verticales y estándar global de las cuerdas de rescate?", "o": ["La poliamida (nylon)", "El poliéster, por su alta resistencia a la abrasión", "El polipropileno, porque flota y roza poco", "El algodón, por su flexibilidad y bajo coste"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre las cuerdas:", "o": ["Las fibras naturales se pudren con humedad y soportan poca carga", "Las cuerdas de rescate tienen estructura núcleo-vaina de fibra sintética", "Las de cáñamo y algodón siguen siendo la opción habitual en rescate", "Las cuerdas trenzadas, con todas las fibras expuestas, están obsoletas"], "c": 2}, {"q": "¿A qué temperatura aproximada funde el Dyneema?", "o": ["A unos 230 ºC", "A unos 260 ºC", "A unos 145 ºC", "A unos 350 ºC"], "c": 2}, {"q": "¿Qué porcentaje de la resistencia total de la cuerda aporta el alma?", "o": ["El 65-85 %", "El 15-35 %", "Menos del 10 %", "El 100 %"], "c": 0}, {"q": "¿A qué temperatura aproximada funde el poliéster?", "o": ["A unos 260 ºC", "A unos 145 ºC", "A unos 230 ºC", "A unos 190 ºC"], "c": 0}, {"q": "¿Qué diámetro tiene la cuerda semiestática de tipo A (EN 1891)?", "o": ["De 8,5 a 9,5 mm", "De 10 a 16 mm", "Menos de 8,5 mm", "De 4 a 8 mm"], "c": 1}, {"q": "¿Para qué NO debe usarse nunca un cordino?", "o": ["Como pedal para el puño bloqueador", "Para hacer nudos autoblocantes", "Como cuerda de recuperación", "Como cuerda principal de trabajo"], "c": 3}, {"q": "¿Qué permite identificar el hilo testigo de color del interior de la cuerda?", "o": ["El diámetro exacto", "El número de caídas soportadas", "El año de fabricación", "El fabricante del arnés"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre cuerdas semiestáticas y dinámicas:", "o": ["Las semiestáticas están diseñadas para detener caídas", "Las dinámicas absorben la energía de una caída", "Las semiestáticas tienen una elongación estática ≤ 5 %", "Las dinámicas siguen la norma EN 892"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre las cuerdas dinámicas simple, doble y gemela:", "o": ["Las de uso simple pueden detener una caída por sí solas", "Las de uso doble se usan siempre por parejas", "Las gemelas se pasan por parejas, pero de forma independiente por los anclajes", "Las gemelas se pasan juntas por los mismos anclajes como una sola cuerda"], "c": 2}, {"q": "¿Qué resistencia estática mínima exige la norma para la cuerda semiestática tipo A?", "o": ["12 kN (≥ 1.200 kg)", "6 kN (≥ 600 kg)", "45 kN (≥ 4.500 kg)", "22 kN (≥ 2.200 kg)"], "c": 3}, {"q": "En una cuerda dinámica simple (EN 892), ¿qué fuerza de choque máxima se admite con factor de caída 1,77?", "o": ["Menos de 12 kN", "Menos de 6 kN", "Menos de 22 kN", "Menos de 2 kN"], "c": 0}, {"q": "¿Qué tipo de cuerda semiestática flota sobre el agua y se usa en cañones y barrancos?", "o": ["La tipo A, de 10 a 16 mm", "La tipo C, con alma de polipropileno", "La tipo B, de 8,5 a 9,5 mm", "La tipo L, de menos de 8,5 mm"], "c": 1}, {"q": "¿Qué diámetro tiene la semiestática de tipo B (EN 1891)?", "o": ["De 10 a 16 mm", "Menos de 8,5 mm", "De 8,5 a 9,5 mm", "De 9,5 a 10,5 mm"], "c": 2}, {"q": "¿Qué porcentaje mínimo de alma debe tener una cuerda dinámica simple (EN 892)?", "o": ["Más del 20 %", "Más del 80 %", "Más del 95 %", "Más del 50 %"], "c": 3}, {"q": "¿Cuál es la vida útil máxima de una cuerda desde su fabricación?", "o": ["2 años", "10 años", "5 años", "25 años"], "c": 1}, {"q": "¿Cómo debe lavarse una cuerda, al menos una vez al año?", "o": ["Con agua caliente y lejía", "Con disolvente, en seco", "Con agua hirviendo y suavizante", "Con agua fría y jabón suave"], "c": 3}, {"q": "¿Dónde debe secarse una cuerda mojada?", "o": ["A la sombra, lejos del calor", "Al sol, para que seque antes", "Junto a un radiador", "Dentro de la saca, cerrada"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre la conservación de las cuerdas:", "o": ["Se revisa de forma táctil y visual antes y después de cada uso", "Se transporta en saca, plegada sin bucles ni torsiones", "Una cuerda golpeada por piezas metálicas debe examinarse a fondo", "Si se moja, se puede secar junto a un radiador para ir más rápido"], "c": 3}, {"q": "¿Cuál de estas situaciones obliga a dar de baja una cuerda?", "o": ["Tener tres años de antigüedad desde la fabricación", "Haber detenido una fuerte caída", "Haberse lavado con agua fría y jabón suave", "Haberse secado a la sombra, lejos del calor"], "c": 1}, {"q": "¿Qué puede ocurrir si una cuerda mojada se congela?", "o": ["Se vuelve más resistente a la abrasión y al corte", "Absorbe menos agua y pesa menos que seca", "Debilita e incluso rompe las fibras del alma", "No sufre ningún cambio en su estructura interna"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre la vida útil y la baja de las cuerdas:", "o": ["Una cuerda de 2017 casi sin usar puede utilizarse como máximo hasta 2027", "Hay que llevar el historial de cada cuerda: usos, caídas y año de fabricación", "Ante la duda en la revisión, la cuerda se corta y se desecha", "La vida útil máxima de 10 años se cuenta desde el primer uso"], "c": 3}, {"q": "¿Cuál es la fuerza máxima de rotura de una cuerda de 9 mm, según la tabla del manual?", "o": ["2.175 daN", "1.460 daN", "1.150 daN", "560 daN"], "c": 1}, {"q": "¿Qué resistencia mínima debe tener una cinta (EN 565)?", "o": ["8 kN", "5 kN", "45 kN", "22 kN"], "c": 3}, {"q": "¿Qué es la cuerda activa?", "o": ["El tramo que queda libre de toda tensión", "El tramo sometido a tensión en la maniobra", "La cuerda de reserva que va guardada en la saca", "La cuerda de menor diámetro de la maniobra"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre las reglas de los nudos:", "o": ["Simplicidad = seguridad: deben poder comprobarse al instante", "Deben estar bien «peinados», con los cabos paralelos", "Deben hacerse sin dudar, hasta mecanizarlos", "Conviene saber muchos nudos aunque se dominen poco"], "c": 3}, {"q": "¿Qué opción de anillo de cinta es la indicada con hielo?", "o": ["El nudo de cinta (manual)", "La cinta cosida de fábrica", "La cuerda doblada", "El anillo con nudo de alondra"], "c": 0}, {"q": "¿Qué pérdida aproximada de resistencia provoca el ballestrinque?", "o": ["Alrededor del 25 %", "Alrededor del 40 %", "Alrededor del 10 %", "Alrededor del 60 %"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre las cintas (EN 565):", "o": ["Deben resistir al menos 22 kN", "La cinta cosida ofrece más resistencia en condiciones normales", "Son dinámicas y absorben la energía de una caída", "Al ser planas, tienen más superficie de contacto que una cuerda"], "c": 2}, {"q": "¿Qué ancho tienen las cintas más polivalentes?", "o": ["De 15 a 26 mm", "De 5 a 10 mm", "De 30 a 45 mm", "De 50 a 60 mm"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre la pérdida de resistencia por los nudos:", "o": ["El ballestrinque pierde ≈ 40 % y estrangula la cuerda", "El tejedor doble pierde ≈ 25 %, el que menos entre los de unión", "El nudo en nueve es el que más resistencia pierde, más del 40 %", "Una cuerda doblada 180º con radio de 5 mm pierde ≈ 30 %"], "c": 2}, {"q": "¿Cuál es el mejor nudo para encordarse por su fiabilidad y facilidad de inspección?", "o": ["El nudo de ocho", "El ballestrinque", "El nudo plano", "El medio nudo"], "c": 0}, {"q": "¿Qué nudo sirve para unir cuerdas de distinto diámetro, siempre con sobrenudos dobles?", "o": ["El tejedor doble", "El ocho reseguido", "El pescador simple", "El nudo plano"], "c": 0}, {"q": "¿Para qué se utiliza la mariposa?", "o": ["Para frenar una carga sin ningún equipo mecánico", "Para ascender por una cuerda fija sin bloqueadores", "Para aislar un tramo de cuerda dañado", "Para cerrar un anillo destinado a un SAS"], "c": 2}, {"q": "¿Qué precaución exige siempre el bulín?", "o": ["Hacerlo únicamente con las dos manos a la vez", "Rematarlo con un sobrenudo de seguridad", "Apretarlo siempre con el pie contra el suelo", "Usarlo solo con cintas y nunca con cuerdas"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre los nudos autoblocantes:", "o": ["El machard con mosquetón puede usarse sobre cuerdas heladas", "El prohaska es el más polivalente y funciona con 4 vueltas", "El prussik puede hacerse con cordino o con cinta plana", "Cuanta más diferencia de diámetro, mayor capacidad de bloqueo"], "c": 0}, {"q": "¿Con cuántas vueltas funciona el prohaska, con cordino o cinta plana?", "o": ["Con 2 vueltas", "Con 9 vueltas", "Con 12 vueltas", "Con 4 vueltas"], "c": 3}, {"q": "¿En qué tipo de conector se instala el nudo dinámico (Munter)?", "o": ["En un conector en D simétrico", "En una polea fija", "En un conector HMS (de pera)", "En un anillo de cinta"], "c": 2}, {"q": "¿Cuál es el diámetro mínimo del cordino para hacer un machard?", "o": ["3 mm", "4 mm", "7 mm", "10 mm"], "c": 2}, {"q": "¿Cuánto deben medir los chicotes sobrantes del nudo de cinta?", "o": ["Unos 2 cm en total, para no molestar", "Al menos el doble del ancho del nudo", "Medio metro cada uno, como mínimo siempre", "No se deja sobrante, para que no se enganche"], "c": 1}, {"q": "¿Qué significan las siglas SAS?", "o": ["Sistema de Anclajes de Seguridad", "Sistema de Amarre Simple y Seguro", "Soporte de Anclaje Semiestático", "Seguro de Anclaje Secundario"], "c": 0}, {"q": "Como regla general, ¿cuántos puntos diferenciados debe tener un SAS?", "o": ["Uno solo, el más resistente de todos", "Un mínimo de diez, para repartir bien la carga", "Ninguno, si la cuerda de trabajo es nueva", "Mínimo dos: uno principal y uno de seguridad"], "c": 3}, {"q": "¿Cuándo aparece el efecto cremallera en un SAS en línea?", "o": ["Si P está más alto que S o hay bucle entre ambos", "Si P y S están a la misma altura y sin bucle", "Si se usan anillos de cinta cosidos de fábrica", "Si el ángulo de la triangulación es de 0º"], "c": 0}, {"q": "¿Qué ángulo máximo entre brazos se recomienda en una triangulación?", "o": ["Menos de 120º", "Menos de 150º", "Menos de 60º", "Exactamente 90º"], "c": 2}, {"q": "En una triangulación con 120º entre brazos, ¿qué porcentaje del peso soporta cada anclaje?", "o": ["El 50 %", "El 100 %", "El 71 %", "El 190 %"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre fraccionamientos y desviaciones:", "o": ["El fraccionamiento crea líneas independientes sin roce con la estructura", "La desviación solo soporta la fuerza lateral de deflexión", "La desviación necesita un anclaje tan resistente como un SAS principal", "El fraccionamiento permite el tránsito simultáneo de varios rescatadores"], "c": 2}, {"q": "¿Qué resistencia tiene un anillo de cinta colocado con nudo de alondra?", "o": ["16 kN", "8 kN", "22 kN", "44 kN"], "c": 1}, {"q": "En una triangulación con 90º entre brazos, ¿qué porcentaje del peso soporta cada anclaje?", "o": ["El 58 %", "El 100 %", "El 50 %", "El 71 %"], "c": 3}], "B": [{"q": "Marca la afirmación INCORRECTA sobre la pérdida de resistencia por los nudos:", "o": ["Una cuerda doblada 180º con radio de 5 mm pierde ≈ 30 %", "El ballestrinque pierde ≈ 40 % y estrangula la cuerda", "El tejedor doble pierde ≈ 25 %, el que menos entre los de unión", "El nudo en nueve es el que más resistencia pierde, más del 40 %"], "c": 3}, {"q": "¿Cómo debe lavarse una cuerda, al menos una vez al año?", "o": ["Con agua hirviendo y suavizante", "Con agua fría y jabón suave", "Con agua caliente y lejía", "Con disolvente, en seco"], "c": 1}, {"q": "¿Qué puede ocurrir si una cuerda mojada se congela?", "o": ["Debilita e incluso rompe las fibras del alma", "No sufre ningún cambio en su estructura interna", "Absorbe menos agua y pesa menos que seca", "Se vuelve más resistente a la abrasión y al corte"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre las reglas de los nudos:", "o": ["Deben estar bien «peinados», con los cabos paralelos", "Deben hacerse sin dudar, hasta mecanizarlos", "Conviene saber muchos nudos aunque se dominen poco", "Simplicidad = seguridad: deben poder comprobarse al instante"], "c": 2}, {"q": "¿Con cuántas vueltas funciona el prohaska, con cordino o cinta plana?", "o": ["Con 9 vueltas", "Con 2 vueltas", "Con 4 vueltas", "Con 12 vueltas"], "c": 2}, {"q": "¿Qué diámetro tiene la semiestática de tipo B (EN 1891)?", "o": ["De 8,5 a 9,5 mm", "De 9,5 a 10,5 mm", "De 10 a 16 mm", "Menos de 8,5 mm"], "c": 0}, {"q": "¿A qué temperatura aproximada funde el poliéster?", "o": ["A unos 260 ºC", "A unos 230 ºC", "A unos 145 ºC", "A unos 190 ºC"], "c": 0}, {"q": "¿Qué permite identificar el hilo testigo de color del interior de la cuerda?", "o": ["El número de caídas soportadas", "El año de fabricación", "El fabricante del arnés", "El diámetro exacto"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre los nudos autoblocantes:", "o": ["Cuanta más diferencia de diámetro, mayor capacidad de bloqueo", "El prohaska es el más polivalente y funciona con 4 vueltas", "El prussik puede hacerse con cordino o con cinta plana", "El machard con mosquetón puede usarse sobre cuerdas heladas"], "c": 3}, {"q": "¿Qué porcentaje mínimo de alma debe tener una cuerda dinámica simple (EN 892)?", "o": ["Más del 95 %", "Más del 80 %", "Más del 50 %", "Más del 20 %"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre las cintas (EN 565):", "o": ["Son dinámicas y absorben la energía de una caída", "Al ser planas, tienen más superficie de contacto que una cuerda", "Deben resistir al menos 22 kN", "La cinta cosida ofrece más resistencia en condiciones normales"], "c": 0}, {"q": "¿Qué ancho tienen las cintas más polivalentes?", "o": ["De 50 a 60 mm", "De 5 a 10 mm", "De 15 a 26 mm", "De 30 a 45 mm"], "c": 2}, {"q": "¿Qué material es el más usado en actividades verticales y estándar global de las cuerdas de rescate?", "o": ["El algodón, por su flexibilidad y bajo coste", "El poliéster, por su alta resistencia a la abrasión", "El polipropileno, porque flota y roza poco", "La poliamida (nylon)"], "c": 3}, {"q": "¿A qué temperatura aproximada funde el Dyneema?", "o": ["A unos 145 ºC", "A unos 260 ºC", "A unos 350 ºC", "A unos 230 ºC"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre la conservación de las cuerdas:", "o": ["Se revisa de forma táctil y visual antes y después de cada uso", "Si se moja, se puede secar junto a un radiador para ir más rápido", "Se transporta en saca, plegada sin bucles ni torsiones", "Una cuerda golpeada por piezas metálicas debe examinarse a fondo"], "c": 1}, {"q": "¿Para qué NO debe usarse nunca un cordino?", "o": ["Para hacer nudos autoblocantes", "Como cuerda de recuperación", "Como cuerda principal de trabajo", "Como pedal para el puño bloqueador"], "c": 2}, {"q": "¿Qué precaución exige siempre el bulín?", "o": ["Hacerlo únicamente con las dos manos a la vez", "Usarlo solo con cintas y nunca con cuerdas", "Apretarlo siempre con el pie contra el suelo", "Rematarlo con un sobrenudo de seguridad"], "c": 3}, {"q": "¿Para qué se utiliza la mariposa?", "o": ["Para cerrar un anillo destinado a un SAS", "Para aislar un tramo de cuerda dañado", "Para frenar una carga sin ningún equipo mecánico", "Para ascender por una cuerda fija sin bloqueadores"], "c": 1}, {"q": "¿Cuál de estas situaciones obliga a dar de baja una cuerda?", "o": ["Tener tres años de antigüedad desde la fabricación", "Haberse lavado con agua fría y jabón suave", "Haberse secado a la sombra, lejos del calor", "Haber detenido una fuerte caída"], "c": 3}, {"q": "¿Cuánto deben medir los chicotes sobrantes del nudo de cinta?", "o": ["Al menos el doble del ancho del nudo", "Unos 2 cm en total, para no molestar", "Medio metro cada uno, como mínimo siempre", "No se deja sobrante, para que no se enganche"], "c": 0}, {"q": "Como regla general, ¿cuántos puntos diferenciados debe tener un SAS?", "o": ["Ninguno, si la cuerda de trabajo es nueva", "Un mínimo de diez, para repartir bien la carga", "Uno solo, el más resistente de todos", "Mínimo dos: uno principal y uno de seguridad"], "c": 3}, {"q": "¿Qué opción de anillo de cinta es la indicada con hielo?", "o": ["El anillo con nudo de alondra", "El nudo de cinta (manual)", "La cinta cosida de fábrica", "La cuerda doblada"], "c": 1}, {"q": "En rescate, ¿qué cuerdas son las únicas válidas?", "o": ["Las de cáñamo con estructura trenzada, resistentes", "Las de polipropileno sin camisa protectora", "Las sintéticas con estructura núcleo-vaina", "Las de algodón de gran diámetro, muy flexibles"], "c": 2}, {"q": "¿Qué pérdida aproximada de resistencia provoca el ballestrinque?", "o": ["Alrededor del 25 %", "Alrededor del 60 %", "Alrededor del 10 %", "Alrededor del 40 %"], "c": 3}, {"q": "¿Qué ángulo máximo entre brazos se recomienda en una triangulación?", "o": ["Menos de 120º", "Menos de 60º", "Exactamente 90º", "Menos de 150º"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre cuerdas semiestáticas y dinámicas:", "o": ["Las dinámicas siguen la norma EN 892", "Las semiestáticas tienen una elongación estática ≤ 5 %", "Las dinámicas absorben la energía de una caída", "Las semiestáticas están diseñadas para detener caídas"], "c": 3}, {"q": "¿Cuándo protege realmente una cuerda de rescate?", "o": ["Cuando es de fabricación reciente y apenas usada", "Cuando está en manos de personal entrenado", "Cuando tiene un diámetro muy grande y es nueva", "Cuando es de un color llamativo y bien visible"], "c": 1}, {"q": "¿Cuándo aparece el efecto cremallera en un SAS en línea?", "o": ["Si se usan anillos de cinta cosidos de fábrica", "Si P y S están a la misma altura y sin bucle", "Si el ángulo de la triangulación es de 0º", "Si P está más alto que S o hay bucle entre ambos"], "c": 3}, {"q": "¿Qué tipo de cuerda semiestática flota sobre el agua y se usa en cañones y barrancos?", "o": ["La tipo C, con alma de polipropileno", "La tipo L, de menos de 8,5 mm", "La tipo B, de 8,5 a 9,5 mm", "La tipo A, de 10 a 16 mm"], "c": 0}, {"q": "¿Cuál es la fuerza máxima de rotura de una cuerda de 9 mm, según la tabla del manual?", "o": ["560 daN", "1.460 daN", "2.175 daN", "1.150 daN"], "c": 1}, {"q": "En una triangulación con 90º entre brazos, ¿qué porcentaje del peso soporta cada anclaje?", "o": ["El 58 %", "El 50 %", "El 71 %", "El 100 %"], "c": 2}, {"q": "¿Qué porcentaje de la resistencia total de la cuerda aporta el alma?", "o": ["El 65-85 %", "El 15-35 %", "El 100 %", "Menos del 10 %"], "c": 0}, {"q": "¿Cuál es el mejor nudo para encordarse por su fiabilidad y facilidad de inspección?", "o": ["El medio nudo", "El nudo plano", "El nudo de ocho", "El ballestrinque"], "c": 2}, {"q": "¿En qué tipo de conector se instala el nudo dinámico (Munter)?", "o": ["En un conector HMS (de pera)", "En un conector en D simétrico", "En una polea fija", "En un anillo de cinta"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre las cuerdas dinámicas simple, doble y gemela:", "o": ["Las gemelas se pasan por parejas, pero de forma independiente por los anclajes", "Las de uso doble se usan siempre por parejas", "Las gemelas se pasan juntas por los mismos anclajes como una sola cuerda", "Las de uso simple pueden detener una caída por sí solas"], "c": 0}, {"q": "¿Qué significan las siglas SAS?", "o": ["Seguro de Anclaje Secundario", "Sistema de Amarre Simple y Seguro", "Sistema de Anclajes de Seguridad", "Soporte de Anclaje Semiestático"], "c": 2}, {"q": "En una triangulación con 120º entre brazos, ¿qué porcentaje del peso soporta cada anclaje?", "o": ["El 71 %", "El 100 %", "El 190 %", "El 50 %"], "c": 1}, {"q": "¿Qué resistencia tiene un anillo de cinta colocado con nudo de alondra?", "o": ["8 kN", "44 kN", "22 kN", "16 kN"], "c": 0}, {"q": "¿Dónde debe secarse una cuerda mojada?", "o": ["Junto a un radiador", "Al sol, para que seque antes", "Dentro de la saca, cerrada", "A la sombra, lejos del calor"], "c": 3}, {"q": "En una cuerda dinámica simple (EN 892), ¿qué fuerza de choque máxima se admite con factor de caída 1,77?", "o": ["Menos de 6 kN", "Menos de 2 kN", "Menos de 12 kN", "Menos de 22 kN"], "c": 2}, {"q": "¿Cuál es la vida útil máxima de una cuerda desde su fabricación?", "o": ["2 años", "25 años", "10 años", "5 años"], "c": 2}, {"q": "¿Qué diámetro tiene la cuerda semiestática de tipo A (EN 1891)?", "o": ["Menos de 8,5 mm", "De 10 a 16 mm", "De 8,5 a 9,5 mm", "De 4 a 8 mm"], "c": 1}, {"q": "¿Qué resistencia estática mínima exige la norma para la cuerda semiestática tipo A?", "o": ["22 kN (≥ 2.200 kg)", "45 kN (≥ 4.500 kg)", "6 kN (≥ 600 kg)", "12 kN (≥ 1.200 kg)"], "c": 0}, {"q": "¿Cuál es el diámetro mínimo del cordino para hacer un machard?", "o": ["10 mm", "3 mm", "4 mm", "7 mm"], "c": 3}, {"q": "Marca la afirmación INCORRECTA sobre fraccionamientos y desviaciones:", "o": ["La desviación necesita un anclaje tan resistente como un SAS principal", "La desviación solo soporta la fuerza lateral de deflexión", "El fraccionamiento permite el tránsito simultáneo de varios rescatadores", "El fraccionamiento crea líneas independientes sin roce con la estructura"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre la vida útil y la baja de las cuerdas:", "o": ["Una cuerda de 2017 casi sin usar puede utilizarse como máximo hasta 2027", "Ante la duda en la revisión, la cuerda se corta y se desecha", "La vida útil máxima de 10 años se cuenta desde el primer uso", "Hay que llevar el historial de cada cuerda: usos, caídas y año de fabricación"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre las cuerdas:", "o": ["Las fibras naturales se pudren con humedad y soportan poca carga", "Las de cáñamo y algodón siguen siendo la opción habitual en rescate", "Las cuerdas trenzadas, con todas las fibras expuestas, están obsoletas", "Las cuerdas de rescate tienen estructura núcleo-vaina de fibra sintética"], "c": 1}, {"q": "¿Qué nudo sirve para unir cuerdas de distinto diámetro, siempre con sobrenudos dobles?", "o": ["El nudo plano", "El ocho reseguido", "El tejedor doble", "El pescador simple"], "c": 2}, {"q": "¿Qué es la cuerda activa?", "o": ["La cuerda de menor diámetro de la maniobra", "El tramo sometido a tensión en la maniobra", "El tramo que queda libre de toda tensión", "La cuerda de reserva que va guardada en la saca"], "c": 1}, {"q": "¿Qué resistencia mínima debe tener una cinta (EN 565)?", "o": ["8 kN", "45 kN", "5 kN", "22 kN"], "c": 3}], "C": [{"q": "¿Cuál es el mejor nudo para encordarse por su fiabilidad y facilidad de inspección?", "o": ["El ballestrinque", "El medio nudo", "El nudo plano", "El nudo de ocho"], "c": 3}, {"q": "¿Cuál de estas situaciones obliga a dar de baja una cuerda?", "o": ["Haberse lavado con agua fría y jabón suave", "Haber detenido una fuerte caída", "Tener tres años de antigüedad desde la fabricación", "Haberse secado a la sombra, lejos del calor"], "c": 1}, {"q": "¿Qué ancho tienen las cintas más polivalentes?", "o": ["De 15 a 26 mm", "De 50 a 60 mm", "De 5 a 10 mm", "De 30 a 45 mm"], "c": 0}, {"q": "¿A qué temperatura aproximada funde el Dyneema?", "o": ["A unos 350 ºC", "A unos 260 ºC", "A unos 145 ºC", "A unos 230 ºC"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre fraccionamientos y desviaciones:", "o": ["El fraccionamiento permite el tránsito simultáneo de varios rescatadores", "El fraccionamiento crea líneas independientes sin roce con la estructura", "La desviación necesita un anclaje tan resistente como un SAS principal", "La desviación solo soporta la fuerza lateral de deflexión"], "c": 2}, {"q": "¿Qué nudo sirve para unir cuerdas de distinto diámetro, siempre con sobrenudos dobles?", "o": ["El tejedor doble", "El pescador simple", "El nudo plano", "El ocho reseguido"], "c": 0}, {"q": "En una cuerda dinámica simple (EN 892), ¿qué fuerza de choque máxima se admite con factor de caída 1,77?", "o": ["Menos de 12 kN", "Menos de 22 kN", "Menos de 6 kN", "Menos de 2 kN"], "c": 0}, {"q": "¿A qué temperatura aproximada funde el poliéster?", "o": ["A unos 190 ºC", "A unos 260 ºC", "A unos 230 ºC", "A unos 145 ºC"], "c": 1}, {"q": "¿Qué es la cuerda activa?", "o": ["El tramo que queda libre de toda tensión", "La cuerda de menor diámetro de la maniobra", "La cuerda de reserva que va guardada en la saca", "El tramo sometido a tensión en la maniobra"], "c": 3}, {"q": "¿Cuándo protege realmente una cuerda de rescate?", "o": ["Cuando es de un color llamativo y bien visible", "Cuando es de fabricación reciente y apenas usada", "Cuando está en manos de personal entrenado", "Cuando tiene un diámetro muy grande y es nueva"], "c": 2}, {"q": "¿Qué precaución exige siempre el bulín?", "o": ["Rematarlo con un sobrenudo de seguridad", "Usarlo solo con cintas y nunca con cuerdas", "Hacerlo únicamente con las dos manos a la vez", "Apretarlo siempre con el pie contra el suelo"], "c": 0}, {"q": "¿Qué pérdida aproximada de resistencia provoca el ballestrinque?", "o": ["Alrededor del 10 %", "Alrededor del 25 %", "Alrededor del 40 %", "Alrededor del 60 %"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre la pérdida de resistencia por los nudos:", "o": ["El ballestrinque pierde ≈ 40 % y estrangula la cuerda", "Una cuerda doblada 180º con radio de 5 mm pierde ≈ 30 %", "El tejedor doble pierde ≈ 25 %, el que menos entre los de unión", "El nudo en nueve es el que más resistencia pierde, más del 40 %"], "c": 3}, {"q": "¿Qué diámetro tiene la cuerda semiestática de tipo A (EN 1891)?", "o": ["De 10 a 16 mm", "De 8,5 a 9,5 mm", "Menos de 8,5 mm", "De 4 a 8 mm"], "c": 0}, {"q": "¿Qué ángulo máximo entre brazos se recomienda en una triangulación?", "o": ["Menos de 150º", "Menos de 60º", "Menos de 120º", "Exactamente 90º"], "c": 1}, {"q": "¿Qué material es el más usado en actividades verticales y estándar global de las cuerdas de rescate?", "o": ["El polipropileno, porque flota y roza poco", "El poliéster, por su alta resistencia a la abrasión", "La poliamida (nylon)", "El algodón, por su flexibilidad y bajo coste"], "c": 2}, {"q": "¿Cuánto deben medir los chicotes sobrantes del nudo de cinta?", "o": ["Medio metro cada uno, como mínimo siempre", "No se deja sobrante, para que no se enganche", "Unos 2 cm en total, para no molestar", "Al menos el doble del ancho del nudo"], "c": 3}, {"q": "¿Con cuántas vueltas funciona el prohaska, con cordino o cinta plana?", "o": ["Con 2 vueltas", "Con 4 vueltas", "Con 9 vueltas", "Con 12 vueltas"], "c": 1}, {"q": "¿Cuál es la fuerza máxima de rotura de una cuerda de 9 mm, según la tabla del manual?", "o": ["560 daN", "1.150 daN", "2.175 daN", "1.460 daN"], "c": 3}, {"q": "¿Qué resistencia tiene un anillo de cinta colocado con nudo de alondra?", "o": ["8 kN", "44 kN", "16 kN", "22 kN"], "c": 0}, {"q": "¿Qué permite identificar el hilo testigo de color del interior de la cuerda?", "o": ["El fabricante del arnés", "El número de caídas soportadas", "El diámetro exacto", "El año de fabricación"], "c": 3}, {"q": "¿Qué porcentaje mínimo de alma debe tener una cuerda dinámica simple (EN 892)?", "o": ["Más del 80 %", "Más del 50 %", "Más del 20 %", "Más del 95 %"], "c": 1}, {"q": "¿Para qué NO debe usarse nunca un cordino?", "o": ["Como pedal para el puño bloqueador", "Para hacer nudos autoblocantes", "Como cuerda principal de trabajo", "Como cuerda de recuperación"], "c": 2}, {"q": "¿Qué opción de anillo de cinta es la indicada con hielo?", "o": ["La cinta cosida de fábrica", "La cuerda doblada", "El anillo con nudo de alondra", "El nudo de cinta (manual)"], "c": 3}, {"q": "¿Dónde debe secarse una cuerda mojada?", "o": ["Dentro de la saca, cerrada", "A la sombra, lejos del calor", "Al sol, para que seque antes", "Junto a un radiador"], "c": 1}, {"q": "¿Qué significan las siglas SAS?", "o": ["Soporte de Anclaje Semiestático", "Sistema de Amarre Simple y Seguro", "Seguro de Anclaje Secundario", "Sistema de Anclajes de Seguridad"], "c": 3}, {"q": "¿Cuál es el diámetro mínimo del cordino para hacer un machard?", "o": ["10 mm", "7 mm", "3 mm", "4 mm"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre las cuerdas dinámicas simple, doble y gemela:", "o": ["Las de uso simple pueden detener una caída por sí solas", "Las gemelas se pasan juntas por los mismos anclajes como una sola cuerda", "Las de uso doble se usan siempre por parejas", "Las gemelas se pasan por parejas, pero de forma independiente por los anclajes"], "c": 3}, {"q": "Marca la afirmación INCORRECTA sobre las reglas de los nudos:", "o": ["Conviene saber muchos nudos aunque se dominen poco", "Deben hacerse sin dudar, hasta mecanizarlos", "Simplicidad = seguridad: deben poder comprobarse al instante", "Deben estar bien «peinados», con los cabos paralelos"], "c": 0}, {"q": "En una triangulación con 90º entre brazos, ¿qué porcentaje del peso soporta cada anclaje?", "o": ["El 50 %", "El 71 %", "El 58 %", "El 100 %"], "c": 1}, {"q": "En rescate, ¿qué cuerdas son las únicas válidas?", "o": ["Las de algodón de gran diámetro, muy flexibles", "Las de polipropileno sin camisa protectora", "Las sintéticas con estructura núcleo-vaina", "Las de cáñamo con estructura trenzada, resistentes"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre las cintas (EN 565):", "o": ["Son dinámicas y absorben la energía de una caída", "Al ser planas, tienen más superficie de contacto que una cuerda", "La cinta cosida ofrece más resistencia en condiciones normales", "Deben resistir al menos 22 kN"], "c": 0}, {"q": "¿Qué porcentaje de la resistencia total de la cuerda aporta el alma?", "o": ["El 15-35 %", "Menos del 10 %", "El 65-85 %", "El 100 %"], "c": 2}, {"q": "Marca la afirmación INCORRECTA sobre cuerdas semiestáticas y dinámicas:", "o": ["Las semiestáticas están diseñadas para detener caídas", "Las dinámicas absorben la energía de una caída", "Las dinámicas siguen la norma EN 892", "Las semiestáticas tienen una elongación estática ≤ 5 %"], "c": 0}, {"q": "¿Qué diámetro tiene la semiestática de tipo B (EN 1891)?", "o": ["De 8,5 a 9,5 mm", "Menos de 8,5 mm", "De 10 a 16 mm", "De 9,5 a 10,5 mm"], "c": 0}, {"q": "¿Qué tipo de cuerda semiestática flota sobre el agua y se usa en cañones y barrancos?", "o": ["La tipo B, de 8,5 a 9,5 mm", "La tipo A, de 10 a 16 mm", "La tipo C, con alma de polipropileno", "La tipo L, de menos de 8,5 mm"], "c": 2}, {"q": "¿Cuándo aparece el efecto cremallera en un SAS en línea?", "o": ["Si P y S están a la misma altura y sin bucle", "Si P está más alto que S o hay bucle entre ambos", "Si el ángulo de la triangulación es de 0º", "Si se usan anillos de cinta cosidos de fábrica"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre las cuerdas:", "o": ["Las de cáñamo y algodón siguen siendo la opción habitual en rescate", "Las cuerdas trenzadas, con todas las fibras expuestas, están obsoletas", "Las fibras naturales se pudren con humedad y soportan poca carga", "Las cuerdas de rescate tienen estructura núcleo-vaina de fibra sintética"], "c": 0}, {"q": "Como regla general, ¿cuántos puntos diferenciados debe tener un SAS?", "o": ["Ninguno, si la cuerda de trabajo es nueva", "Uno solo, el más resistente de todos", "Un mínimo de diez, para repartir bien la carga", "Mínimo dos: uno principal y uno de seguridad"], "c": 3}, {"q": "¿Cómo debe lavarse una cuerda, al menos una vez al año?", "o": ["Con agua caliente y lejía", "Con disolvente, en seco", "Con agua fría y jabón suave", "Con agua hirviendo y suavizante"], "c": 2}, {"q": "En una triangulación con 120º entre brazos, ¿qué porcentaje del peso soporta cada anclaje?", "o": ["El 50 %", "El 71 %", "El 100 %", "El 190 %"], "c": 2}, {"q": "¿Cuál es la vida útil máxima de una cuerda desde su fabricación?", "o": ["2 años", "10 años", "25 años", "5 años"], "c": 1}, {"q": "¿Qué resistencia estática mínima exige la norma para la cuerda semiestática tipo A?", "o": ["22 kN (≥ 2.200 kg)", "6 kN (≥ 600 kg)", "12 kN (≥ 1.200 kg)", "45 kN (≥ 4.500 kg)"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre la conservación de las cuerdas:", "o": ["Una cuerda golpeada por piezas metálicas debe examinarse a fondo", "Se revisa de forma táctil y visual antes y después de cada uso", "Se transporta en saca, plegada sin bucles ni torsiones", "Si se moja, se puede secar junto a un radiador para ir más rápido"], "c": 3}, {"q": "¿En qué tipo de conector se instala el nudo dinámico (Munter)?", "o": ["En un conector HMS (de pera)", "En un conector en D simétrico", "En un anillo de cinta", "En una polea fija"], "c": 0}, {"q": "Marca la afirmación INCORRECTA sobre la vida útil y la baja de las cuerdas:", "o": ["Una cuerda de 2017 casi sin usar puede utilizarse como máximo hasta 2027", "Hay que llevar el historial de cada cuerda: usos, caídas y año de fabricación", "La vida útil máxima de 10 años se cuenta desde el primer uso", "Ante la duda en la revisión, la cuerda se corta y se desecha"], "c": 2}, {"q": "¿Qué puede ocurrir si una cuerda mojada se congela?", "o": ["No sufre ningún cambio en su estructura interna", "Debilita e incluso rompe las fibras del alma", "Se vuelve más resistente a la abrasión y al corte", "Absorbe menos agua y pesa menos que seca"], "c": 1}, {"q": "Marca la afirmación INCORRECTA sobre los nudos autoblocantes:", "o": ["Cuanta más diferencia de diámetro, mayor capacidad de bloqueo", "El prohaska es el más polivalente y funciona con 4 vueltas", "El machard con mosquetón puede usarse sobre cuerdas heladas", "El prussik puede hacerse con cordino o con cinta plana"], "c": 2}, {"q": "¿Para qué se utiliza la mariposa?", "o": ["Para ascender por una cuerda fija sin bloqueadores", "Para aislar un tramo de cuerda dañado", "Para cerrar un anillo destinado a un SAS", "Para frenar una carga sin ningún equipo mecánico"], "c": 1}, {"q": "¿Qué resistencia mínima debe tener una cinta (EN 565)?", "o": ["5 kN", "45 kN", "8 kN", "22 kN"], "c": 3}]}};
+const LOGO_B64 = "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";
+const ENVIO_URL = 'https://script.google.com/macros/s/AKfycbwd4CQ_vc0crB8b_9dkykgZj1utv8k7ZDS-R0pNeohp2wq1gkCN6pWB9IK3URzuSQsm/exec';
+</script>
+
+<script id="nucleo">
+// ---------- Puntuacion ----------
+function puntuar(respuestas, preguntas){
+  let aciertos = 0, fallos = 0;
+  respuestas.forEach(function(r, i){
+    if (r === null || r === undefined) return;
+    if (r === preguntas[i].c) aciertos++; else fallos++;
+  });
+  const blancos = respuestas.length - aciertos - fallos;
+  const nota = Math.round(Math.max(0, aciertos - fallos / 3) * 0.2 * 100) / 100;
+  return { aciertos: aciertos, fallos: fallos, blancos: blancos, nota: nota, notaTxt: nota.toFixed(2).replace('.', ',') };
+}
+
+function calcularDatos(snap){
+  const preguntas = DATOS.modelos[snap.modelo];
+  const p = puntuar(snap.respuestas, preguntas);
+  return Object.assign({
+    asignatura: DATOS.asignatura, curso: DATOS.curso, modelo: snap.modelo,
+    nombre: snap.nombre, dni: snap.dni,
+    fecha: new Date().toLocaleDateString('es-ES'),
+    respuestas: snap.respuestas,
+    correctas: preguntas.map(function(x){ return x.c; })
+  }, p);
+}
+
+// ---------- PDF (generado a mano) ----------
+function toWin(s){
+  return String(s)
+    .replace(/≤/g, '<=').replace(/≥/g, '>=').replace(/≈/g, '~')
+    .replace(/[–—]/g, '-').replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
+    .replace(/[^\x00-\xFF]/g, '?');
+}
+function escPDF(s){
+  return toWin(s).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+}
+function enc(s){
+  const a = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) a[i] = s.charCodeAt(i) & 0xFF;
+  return a;
+}
+function cat(arr){
+  let len = 0; arr.forEach(function(a){ len += a.length; });
+  const out = new Uint8Array(len); let p = 0;
+  arr.forEach(function(a){ out.set(a, p); p += a.length; });
+  return out;
+}
+function anchoTexto(s, size, bold){
+  return toWin(s).length * size * (bold ? 0.58 : 0.53);
+}
+
+function generarPDF(d){
+  const W = 595.28, H = 841.89;
+  const ops = [];
+  const f = function(v){ return v.toFixed(2); };
+  const Y = function(top){ return H - top; };
+  const rectStroke = function(x, top, w, h){ ops.push('0.6 w ' + f(x) + ' ' + f(Y(top + h)) + ' ' + f(w) + ' ' + f(h) + ' re S'); };
+  const rectFill = function(x, top, w, h, g){ ops.push(g + ' g ' + f(x) + ' ' + f(Y(top + h)) + ' ' + f(w) + ' ' + f(h) + ' re f 0 g'); };
+  const texto = function(x, base, s, size, bold){
+    ops.push('BT /' + (bold ? 'F2' : 'F1') + ' ' + size + ' Tf ' + f(x) + ' ' + f(Y(base)) + ' Td (' + escPDF(s) + ') Tj ET');
+  };
+  const textoDer = function(xr, base, s, size, bold){ texto(xr - anchoTexto(s, size, bold), base, s, size, bold); };
+  const textoCen = function(xc, base, s, size, bold){ texto(xc - anchoTexto(s, size, bold) / 2, base, s, size, bold); };
+  const linea = function(x1, t1, x2, t2){ ops.push('1 w ' + f(x1) + ' ' + f(Y(t1)) + ' m ' + f(x2) + ' ' + f(Y(t2)) + ' l S'); };
+
+  // Cabecera
+  rectStroke(40, 40, 515, 64);
+  texto(46, 58, DATOS.asignatura, 9.5, true);
+  texto(46, 78, 'EXAMEN MODELO: ' + d.modelo, 10, true);
+  // Logo: 420x69 px -> 150 pt de ancho
+  const logoH = 150 * 69 / 420;
+  ops.push('q 150 0 0 ' + f(logoH) + ' 400 ' + f(Y(60 + logoH)) + ' cm /Im1 Do Q');
+
+  // Filas de datos
+  rectStroke(40, 104, 515, 22);
+  texto(46, 119, 'Nombre y apellidos: ' + d.nombre, 9.5, false);
+  rectStroke(40, 126, 180, 22); texto(46, 141, 'DNI: ' + d.dni, 9.5, false);
+  rectStroke(220, 126, 180, 22); texto(226, 141, 'Fecha: ' + d.fecha, 9.5, false);
+  rectStroke(400, 126, 155, 22); texto(406, 141, 'Curso: ' + d.curso, 9.5, false);
+
+  // Cuadricula
+  const numW = 44, cw = 44, rh = 15, hh = 16, top0 = 160, topF = top0 + hh;
+  const cabecera = function(x0){
+    rectStroke(x0, top0, numW, hh);
+    for (let k = 0; k < 4; k++){
+      rectStroke(x0 + numW + k * cw, top0, cw, hh);
+      textoCen(x0 + numW + k * cw + cw / 2, top0 + 11.5, 'ABCD'[k], 9, true);
+    }
+  };
+  const filas = function(x0, lista){
+    lista.forEach(function(fila, r){
+      const top = topF + r * rh;
+      rectStroke(x0, top, numW, rh);
+      if (fila.num) texto(x0 + 6, top + 10.5, String(fila.num), 9, false);
+      for (let k = 0; k < 4; k++){
+        const cx = x0 + numW + k * cw;
+        if (fila.cor === k) rectFill(cx, top, cw, rh, 0.8);
+        rectStroke(cx, top, cw, rh);
+        if (fila.sel === k){
+          const mx = cx + cw / 2, my = top + rh / 2;
+          linea(mx - 4, my - 4, mx + 4, my + 4);
+          linea(mx - 4, my + 4, mx + 4, my - 4);
+        }
+      }
+    });
+  };
+  const izq = [], der = [];
+  for (let i = 0; i < 50; i++){
+    const fila = { num: i + 1, cor: d.correctas[i], sel: (d.respuestas[i] === null ? null : d.respuestas[i]) };
+    (i < 25 ? izq : der).push(fila);
+  }
+  cabecera(40); filas(40, izq.concat([{num:'',cor:null,sel:null},{num:'',cor:null,sel:null},{num:'',cor:null,sel:null}]));
+  cabecera(295); filas(295, der);
+  // Resumen bajo la columna derecha (3 filas)
+  const resumen = [['ACIERTOS', String(d.aciertos)], ['FALLOS', String(d.fallos)], ['NOTA', d.notaTxt]];
+  resumen.forEach(function(par, r){
+    const top = topF + 25 * rh + r * rh;
+    rectStroke(295, top, 100, rh);
+    texto(300, top + 10.5, par[0], 8.5, true);
+    rectStroke(395, top, 120, rh);
+    texto(401, top + 10.5, par[1], 9, true);
+  });
+
+  // Leyenda
+  texto(40, 612, 'Casilla gris: respuesta correcta.   X: respuesta marcada.', 8.5, false);
+
+  // Firmas
+  rectStroke(40, 630, 250, 90);
+  texto(46, 714, 'Firma del alumno/a', 8.5, false);
+  rectStroke(305, 630, 250, 90);
+  texto(311, 714, 'Firma del profesor/a', 8.5, false);
+
+  // Pie
+  texto(40, 800, d.nombre + ' - Modelo ' + d.modelo + ' - Nota: ' + d.notaTxt, 9, false);
+  textoDer(555, 800, 'Página 1 de 1', 9, false);
+
+  // Objetos del PDF
+  const contenido = ops.join('\n');
+  const contBytes = enc(contenido);
+  const jpeg = Uint8Array.from(atob(LOGO_B64), function(c){ return c.charCodeAt(0); });
+  const streamObj = function(dict, bytes){
+    return cat([enc(dict + '\nstream\n'), bytes, enc('\nendstream')]);
+  };
+  const objs = [
+    enc('<< /Type /Catalog /Pages 2 0 R >>'),
+    enc('<< /Type /Pages /Kids [3 0 R] /Count 1 >>'),
+    enc('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + W + ' ' + H + '] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> /XObject << /Im1 6 0 R >> >> /Contents 7 0 R >>'),
+    enc('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'),
+    enc('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>'),
+    streamObj('<< /Type /XObject /Subtype /Image /Width 420 /Height 69 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpeg.length + ' >>', jpeg),
+    streamObj('<< /Length ' + contBytes.length + ' >>', contBytes)
+  ];
+  const chunks = [enc('%PDF-1.4\n%âãÏÓ\n')];
+  let pos = chunks[0].length;
+  const offsets = [];
+  objs.forEach(function(o, i){
+    offsets.push(pos);
+    const pre = enc((i + 1) + ' 0 obj\n'), post = enc('\nendobj\n');
+    chunks.push(pre, o, post);
+    pos += pre.length + o.length + post.length;
+  });
+  let xref = 'xref\n0 8\n0000000000 65535 f \n';
+  offsets.forEach(function(o){ xref += String(o).padStart(10, '0') + ' 00000 n \n'; });
+  xref += 'trailer\n<< /Size 8 /Root 1 0 R >>\nstartxref\n' + pos + '\n%%EOF\n';
+  chunks.push(enc(xref));
+  return cat(chunks);
+}
+
+function bytesABase64(u8){
+  let s = '';
+  for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+</script>
+
+<script id="app">
+const DURACION_MS = 90 * 60 * 1000;
+const CLAVE_STORAGE = 'examen1532_sesion_v1';
+
+let sesion = null;        // estado del examen en curso
+let resultado = null;     // copia de lo entregado (para reenviar)
+let timerId = null;
+let entregado = false;
+
+const $ = function(id){ return document.getElementById(id); };
+
+function guardar(){ try { localStorage.setItem(CLAVE_STORAGE, JSON.stringify(sesion)); } catch (e) {} }
+function borrarGuardada(){ try { localStorage.removeItem(CLAVE_STORAGE); } catch (e) {} }
+function leerGuardada(){
+  try {
+    const s = localStorage.getItem(CLAVE_STORAGE);
+    if (!s) return null;
+    const o = JSON.parse(s);
+    if (o && Array.isArray(o.respuestas) && o.respuestas.length === 50 && typeof o.limite === 'number' && DATOS.modelos[o.modelo]) return o;
+    return null;
+  } catch (e) { return null; }
+}
+
+function mostrar(id){
+  ['inicio', 'examen', 'final'].forEach(function(s){ $(s).hidden = (s !== id); });
+}
+
+function formatear(ms){
+  const s = Math.max(0, Math.ceil(ms / 1000));
+  return [Math.floor(s / 3600), Math.floor(s % 3600 / 60), s % 60]
+    .map(function(v){ return String(v).padStart(2, '0'); }).join(':');
+}
+
+function empezar(){
+  const nombre = $('nombre').value.trim();
+  const dni = $('dni').value.trim().toUpperCase();
+  const modeloEl = document.querySelector('input[name=modelo]:checked');
+  if (!nombre || !dni || !modeloEl){ $('aviso-inicio').textContent = 'Rellena nombre, DNI y elige modelo.'; return; }
+  if (leerGuardada() && !confirm('Hay un examen guardado sin entregar. Si empiezas uno nuevo, se borrará. ¿Continuar?')) return;
+  borrarGuardada();
+  sesion = { nombre: nombre, dni: dni, modelo: modeloEl.value, respuestas: new Array(50).fill(null), limite: Date.now() + DURACION_MS, actual: 0 };
+  guardar();
+  arrancar();
+}
+
+function continuar(){
+  const g = leerGuardada();
+  if (!g){ $('aviso-inicio').textContent = 'No se pudo recuperar el examen guardado.'; $('continuar-box').hidden = true; return; }
+  sesion = g;
+  arrancar();
+}
+
+function arrancar(){
+  entregado = false;
+  $('info').textContent = 'Modelo ' + sesion.modelo + ' · ' + sesion.nombre + ' · DNI ' + sesion.dni;
+  mostrar('examen');
+  renderPregunta();
+  clearInterval(timerId);
+  tic();
+  if (!entregado) timerId = setInterval(tic, 1000);
+  window.onbeforeunload = function(e){ if (!entregado){ e.preventDefault(); e.returnValue = ''; } };
+}
+
+function tic(){
+  if (entregado || !sesion) return;
+  const restante = sesion.limite - Date.now();
+  $('reloj').textContent = formatear(restante);
+  if (restante <= 0) entregar('tiempo');
+}
+
+function preguntas(){ return DATOS.modelos[sesion.modelo]; }
+
+function renderPregunta(){
+  const i = sesion.actual;
+  const p = preguntas()[i];
+  $('num').textContent = 'Pregunta ' + (i + 1) + ' de 50';
+  $('enunciado').textContent = (i + 1) + '. ' + p.q;
+  const cont = $('opciones');
+  cont.innerHTML = '';
+  p.o.forEach(function(txt, k){
+    const lab = document.createElement('label');
+    lab.className = 'opcion';
+    const inp = document.createElement('input');
+    inp.type = 'radio'; inp.name = 'resp'; inp.value = k;
+    inp.checked = (sesion.respuestas[i] === k);
+    inp.addEventListener('change', function(){
+      sesion.respuestas[i] = k; guardar(); actualizar();
+    });
+    lab.appendChild(inp);
+    lab.appendChild(document.createTextNode(String.fromCharCode(65 + k) + ') ' + txt));
+    cont.appendChild(lab);
+  });
+  $('anterior').disabled = (i === 0);
+  $('siguiente').disabled = (i === 49);
+  actualizar();
+}
+
+function actualizar(){
+  const nav = $('nav');
+  if (!nav.childElementCount){
+    for (let k = 0; k < 50; k++){
+      const b = document.createElement('button');
+      b.textContent = String(k + 1);
+      b.addEventListener('click', function(){ sesion.actual = k; guardar(); renderPregunta(); });
+      nav.appendChild(b);
+    }
+  }
+  let contestadas = 0;
+  Array.prototype.forEach.call(nav.children, function(b, k){
+    const resp = sesion.respuestas[k] !== null;
+    if (resp) contestadas++;
+    b.className = (resp ? 'resp ' : '') + (k === sesion.actual ? 'actual' : '');
+  });
+  $('contador').textContent = 'Contestadas: ' + contestadas + ' de 50';
+}
+
+function entregarManual(){
+  if (entregado) return;
+  const blancos = sesion.respuestas.filter(function(r){ return r === null; }).length;
+  const msg = blancos > 0
+    ? 'Tienes ' + blancos + ' preguntas en blanco. ¿Entregar el examen de todos modos?'
+    : '¿Entregar el examen? No podrás modificarlo después.';
+  if (confirm(msg)) entregar('manual');
+}
+
+async function entregar(motivo){
+  if (entregado) return;
+  entregado = true;
+  clearInterval(timerId);
+  window.onbeforeunload = null;
+  resultado = { nombre: sesion.nombre, dni: sesion.dni, modelo: sesion.modelo, respuestas: sesion.respuestas.slice() };
+  sesion = null;
+  borrarGuardada();
+  mostrar('final');
+  $('motivo').textContent = motivo === 'tiempo'
+    ? 'Se ha agotado el tiempo y el examen se ha entregado automáticamente.'
+    : 'Tu examen se ha entregado correctamente.';
+  await generarYEnviar();
+}
+
+async function generarYEnviar(){
+  const estadoEl = $('estado');
+  const reenviar = $('reenviar');
+  reenviar.disabled = true;
+  estadoEl.className = '';
+  estadoEl.textContent = 'generando el PDF y enviándolo…';
+  let enviado = false;
+  try {
+    const d = calcularDatos(resultado);
+    const bytes = generarPDF(d);
+    const nombreArchivo = 'Examen_1532_Modelo_' + d.modelo + '_' + resultado.dni.replace(/[^A-Za-z0-9]/g, '') + '.pdf';
+    descargar(bytes, nombreArchivo);
+    if (!ENVIO_URL) throw new Error('ENVIO_URL vacía');
+    const resp = await fetch(ENVIO_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({
+        nombre: resultado.nombre, dni: resultado.dni, modelo: resultado.modelo,
+        nota: d.notaTxt, archivo: nombreArchivo, pdf: bytesABase64(bytes)
+      })
+    });
+    const texto = (await resp.text()).trim();
+    enviado = (texto === 'ok');
+  } catch (e) {
+    enviado = false;
+  }
+  if (enviado){
+    estadoEl.textContent = 'PDF enviado.';
+    estadoEl.className = 'ok';
+  } else {
+    estadoEl.textContent = 'NO se ha podido enviar el PDF. Entrega el PDF descargado al profesor.';
+    estadoEl.className = 'error';
+  }
+  reenviar.disabled = false;
+}
+
+function descargar(u8, nombre){
+  const url = URL.createObjectURL(new Blob([u8], { type: 'application/pdf' }));
+  const a = document.createElement('a');
+  a.href = url; a.download = nombre;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+}
+
+// ---------- Eventos ----------
+$('empezar').addEventListener('click', empezar);
+$('continuar').addEventListener('click', continuar);
+$('entregar').addEventListener('click', entregarManual);
+$('anterior').addEventListener('click', function(){ if (sesion.actual > 0){ sesion.actual--; guardar(); renderPregunta(); } });
+$('siguiente').addEventListener('click', function(){ if (sesion.actual < 49){ sesion.actual++; guardar(); renderPregunta(); } });
+$('borrar').addEventListener('click', function(){ sesion.respuestas[sesion.actual] = null; guardar(); renderPregunta(); });
+$('reenviar').addEventListener('click', generarYEnviar);
+
+// Al abrir: ofrecer continuar si hay examen guardado
+(function init(){
+  if (leerGuardada()) $('continuar-box').hidden = false;
+})();
+</script>
+</body>
+</html>
